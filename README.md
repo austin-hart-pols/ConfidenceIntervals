@@ -1,5 +1,5 @@
 # ConfidenceIntervals
-Introduction to statistical inference. Examples using the `biopics.xls` and `DCPS testing.RData` datasets.
+Introduction to statistical inference. Examples using the `DCPS testing.RData` and `anes coded.RData` datasets.
 
 Topics include:
 - Standard normal distribution
