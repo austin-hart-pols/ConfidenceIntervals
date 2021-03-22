@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STATISTICAL INFERENCE</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Austin Hart" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STATISTICAL INFERENCE
+## Confidence Intervals
+### Austin Hart
+### American University
+
+---
+
+
+
+
+
+
+
+
+# 2 flavors of inference
+
+
+- **CAUSAL** inference  
+  - Attribution of cause to an outcome (X caused Y)  
+  - Inference b/c of FPCI  
+  
+- **STATISTICAL** inference  
+  - Ed guess about population parameter given sample data
+  - Inference b/c parameter unseen/unknowable
+
+
+---
+class: inverse, middle
+
+# WHY STATISTICAL INFERENCE?
+
+The problem of sampling variability
+
+
+---
+# Sampling and the need for inference
+
+&gt; What can data from a single sample tell us about the 
+&gt; population from which it was drawn?  
+  
+  
+- **Pop. parameter**: "TRUTH" we seek about a population
+
+- **Sample**: "slice" of data from the population
+
+- **Estimation**: sample statistic as guide to pop parameter.
+
+- **Sampling Variability**: Every. Slice. Is. Different.
+
+
+
+---
+# Every sample statistic is different.
+
+Variability in sample statistics
+
+- Different across samples: `\(\bar{Y}_1 \neq \bar{Y}_2\)`
+
+- Different from target parameter: `\(\bar{Y}_1 \neq \mu\)`
+
+
+---
+# Sampling variability in action
+
+Consider the DCPS math proficiency, 2017
+
+.pull-left[
+Population parameters
+- Pop size (N) = 108  
+- `\(\mu\)` = 27  
+
+]
+
+.pull-right[
+&lt;img src="ConfidenceSlides_files/figure-html/pop-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+# Take a sample...
+
+
+
+.pull-left[
+### Random Sample 1 (n = 25)
+- `\(\bar{Y}_1\)` = 29.6
+
+&lt;img src="ConfidenceSlides_files/figure-html/s1-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+### Random Sample 2 (n = 25)
+- `\(\bar{Y}_2\)` = 17.1
+
+&lt;img src="ConfidenceSlides_files/figure-html/s2-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+class: inverse, middle
+
+# SAMLING DISTRIBUTION
+and the first step to inference
+
+
+---
+# ALL the sample statistics
+
+- Select a random sample, size 25.
+- Calculate the mean math proficiency.
+- Repeat 20,000 times.
+- Plot the results.
+
+
+---
+# Meet the sampling distribution
+
+&gt; Sampling distribution: hypothetical distribution of possible sample
+&gt; statistics drawn from the population.
+
+
+
+
+.pull-left[
+
+&lt;img src="ConfidenceSlides_files/figure-html/sdist-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[  
+Our sampling dist  
+- Mean: 27
+- Median: 26.9
+- Range: 12 to 44.1
+- SD/SE: 4.2  
+]
+
+
+---
+class: inverse, middle
+
+# CENTRAL LIMIT THEOREM
+
+
+---
+# CLT and the Sampling Distribution
+
+&gt; Sampling variability highlights the uncertainty of inference: we don't
+&gt; know if our sample stat is close to the target parameter.
+&gt; But...
+&gt; the Central Limit Theorem proves that the sampling distribution...
+
+
+- Normal distribution
+
+- Mean = `\(\mu\)`
+
+- Standard error `\(\sigma_{\bar{Y}} = s_Y / \sqrt{n}\)`
+
+
+---
+# So what, CLT?
+
+&lt;img src="ConfidenceSlides_files/figure-html/sclt-1.svg" style="display: block; margin: auto;" /&gt;
+
+- Population mean = 27; Sampling mean = 27
+- SE = 4.2
+- % sample means within 2 SEs: 95.6
+
+
+---
+# If you know 1 normal distribution...
+
+**68-95-99 rule**
+
+- 68% of sample means within 1 SE of `\(\mu\)`
+- *95% within 2 SEs*
+- 99.7% within 3 SEs
+
+&lt;img src="ConfidenceSlides_files/figure-html/sclt2-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+---
+class: inverse, middle
+
+# CONFIDENCE INTERVALS
+Embracing the uncertainty
+
+
+---
+# Building a confidence interval
+
+&gt; Your sample mean is w/i 2 SEs of the true population mean,
+&gt; and the chance I'm wrong is only 5%.
+
+$$
+\bar{Y} \pm (2*\sigma_{\bar{Y}})
+$$
+
+- Sample stat: sample mean, `\(\bar{Y}\)`, or proportion, `\(\hat{p}\)`  
+
+- Margin of error: `\(2 * \sigma_{\bar{Y}}\)` 
+
+
+---
+# Knowing your margin of error
+
+- SE, Sample mean
+$$
+\sigma_{\bar{Y}} = \frac{s_Y}{\sqrt{n}}
+$$
+
+- SE, Sample proportion  
+$$
+\sigma_{\hat{p}} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}
+$$
+  
+- Critical statistic
+  - 68% confidence: 1
+  - 95% confidence: 2
+  - 99.7% confidence: 3
+  
+
+---
+class: inverse, middle
+
+# STATISTICAL INFERENCE
+Pulling it all together
+
+---
+# Your own CI
+
+&gt; The 2012 ANES survey includes a sample 3,273 white, non-Hispanic adults. 
+&gt; The mean resentment index score is 0.66, w/a standard deviation of 0.24.
+&gt;
+&gt; Calculate and interpret a 95% confidence interval.
+
+--
+
+.pull-left[
+- *What we know:*
+  - n = 3,273
+  - `\(\bar{Y}=0.66\)`
+  - `\(s_Y = 0.24\)`
+
+]
+
+--
+
+.pull-right[
+- *What we need:* `\(\bar{Y} \pm (2*\sigma_{\bar{Y}})\)`
+  - Standard error, `\(\sigma_{\bar{Y}}=s_Y/\sqrt{n}\)` 
+  - Margin of error `\(2*\sigma_{\bar{Y}}\)`
+  - Interval `\(\bar{Y} \pm ME\)`
+]
+  
+---
+# Reporting your CI
+
+&gt; The 2012 ANES survey includes a sample 3,273 white, non-Hispanic adults. 
+&gt; The mean resentment index score is 0.66, w/a standard deviation of 0.24.
+&gt;
+&gt; Calculate and interpret a 95% confidence interval.
+
+I am 95% confident that the range 0.652 to 0.668 captures the mean resentment index score for the population of white, non-Hispanic adults in 2012.
+
+
+
+---
+# Sample proportion
+
+&gt; In the same survey of 3,273 white, non-Hispanic adults, we find that 54% report owning stocks.
+&gt;
+&gt; Using a confidence interval, how many own stocks in the population?
+
+.pull-left[
+- *What we know:*
+  - n = 3,273
+  - `\(\hat{p}=0.54\)`
+
+]
+
+--
+
+.pull-right[
+- *What we need:* `\(\hat{p} \pm (2*\sigma_{\hat{p}})\)`
+  - Standard error, `\(\sigma_{\hat{p}}=\sqrt{\frac{\hat{p}*(1-\hat{p})}{n}}\)` 
+  - Margin of error `\(2*\sigma_{\hat{p}}\)`
+  - Interval `\(\hat{p} \pm ME\)`
+]
+
+
+---
+# Making the inference
+
+&gt; In the same survey of 3,273 white, non-Hispanic adults, we find that 54% report owning stocks.
+&gt;
+&gt; Using a confidence interval, how many own stocks in the population?
+
+Based on the survey data, I am 95% confident that range 0.52 to 0.56 captures the proportion of stock-owners in the population.
+
+---
+class: inverse
+# Wrapping up
+
+- Sample statistics are variable
+- Sampling distributions are well-defined
+
+- Embrace uncertainty with confidence intervals
+- Pad your estimate by the margin of error
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
